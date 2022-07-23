@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Palmetto Lawn Solutions" property="og:title">
+
     
         <meta content="https://landing-page-app-hero-images.s3.amazonaws.com/media/HQ1QLQPUXQCUDHE70UBQ0UWNPO611YJ1XL9WWM99.jpeg" property="og:image">
         <meta content="Palmetto Lawn Solutions" property="twitter:title">
@@ -33,12 +34,9 @@
        
      
     
-    
     <link href="https://prophone.herokuapp.com/staticfiles/landing_page_gen/style.css" rel="stylesheet">
-    
     <link href="https://prophone.herokuapp.com/staticfiles/landing_page_gen/render.css" rel="stylesheet">
-    
-    <script src="https://prophone.herokuapp.com/staticfiles/landing_page_gen/render.js"></script> 
+    <script src="https://prophone.herokuapp.com/staticfiles/landing_page_gen/render.js"></script>
 </head>
 
 <body>
@@ -47,7 +45,7 @@
 
 <div class = "flex w-full flex-col">  
     <div class="fixed z-40 w-full lg:h-25 lg:py-4 items-start justify-start  bg-white text-gray-700  dark-mode:text-gray-200 dark-mode:bg-gray-800">
-  <div x-data="{ open: false }" class="flex flex-col lg:flex-r max-w-screen-xl px-4 mx-auto lg:items-center lg:justify-between lg:flex-row lg:px-6 lg:px-8">
+  <div x-data="{ open: false,buttonDisabled: false }" class="flex flex-col lg:flex-r max-w-screen-xl px-4 mx-auto lg:items-center lg:justify-between lg:flex-row lg:px-6 lg:px-8">
     <div class="py-4 flex flex-row items-center justify-between">
       
         <a href= " #about "> <img class="h-16 w-auto relative" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/HQ1QLQPUXQCUDHE70UBQ0UWNPO611YJ1XL9WWM99.jpeg" alt="Palmetto Lawn Solutions logo"> </a>
@@ -108,7 +106,7 @@
       
           <a target = "_blank"  x-on:click.prevent="open = true" class="" href="">Send us a Text</a>
             <div x-show.transition.opacity="open" class="transform-none p-4 fixed h-screen w-screen flex justify-center items-center bottom-0 right-0 bg-black bg-opacity-75 z-50">
-    <form x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
+    <form  x-data="{ buttonDisabled: false }" x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
             <h3 class="mb-6 text-2xl font-medium text-black text-center">Send us a Text</h3>
         <div class="block mb-4 border border-gray-200 rounded-lg">
             <input type="text" name="first-name" id="0-first-name" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="First Name">
@@ -123,9 +121,13 @@
             <textarea name="message" cols="5" id="0-message" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="What is your message?"></textarea>
         </div>
         <div class="block">
-        <button type="button" 
+        <button
+
+                x-on:click.debounce.500ms="buttonDisabled = true ;send_sms(0, 'Palmetto-Lawn-Solutions')"
+                 x-bind:disabled="buttonDisabled"
+                type="button"
          
-        onclick= "send_sms(0, 'Palmetto-Lawn-Solutions')" 
+
         class="w-full px-3 py-4 font-bold font-lg text-white  bg-green-400 text-white hover:bg-black hover:text-green-400 rounded-lg">Send</button> 
         </div>           
 
@@ -142,11 +144,11 @@ class="flex relative flex-col w-full  bg-green-900 text-white  lg:flex-row lg:fl
     <div class="flex justify-end p-8 lg:py-32 lg:px-16 lg:pl-10 lg:w-1/2">
         <div class="flex flex-col items-center lg:items-start justify-center w-full lg:max-w-lg">
             <h2 class="mb-3 text-3xl text-center font-extrabold  leading-none sm:text-4xl lg:text-7xl text-center lg:text-left">
-                Palmetto Lawn Solutions  
+                Palmetto Lawn Solutions 
             </h2>
             
             <h1 class="pt-5 lg:text-xl text-center lg:text-left">
-                The best landscaping &amp; hardscaping in  Sumter & surrounding areas.  Exceptional, Professional Landscapers. You Are Our Priority.
+                Exceptional, Professional Landscapers. You Are Our Priority.
             </h1>
             
             <h2 class="py-5 mb-5 lg:text-xl text-center lg:text-left">
@@ -166,12 +168,13 @@ class="flex relative flex-col w-full  bg-green-900 text-white  lg:flex-row lg:fl
 <button 
  id="" type="button" x-on:click.prevent="open = true" class=" 
   w-full lg:w-auto 
+
     inline-flex items-center justify-center h-24 px-6 lg:mr-6 tracking-wide transition duration-200 rounded-lg focus:shadow-outline focus:outline-none  bg-green-400 text-white hover:bg-white hover:text-green-900 z-30">
     <h5 class="text-3xl font-extrabold">Send us a Text</h5> 
 </button>
 
         <div x-show.transition.opacity="open" class="transform-none p-4 fixed h-screen w-screen flex justify-center items-center bottom-0 right-0 bg-black bg-opacity-75 z-50">
-    <form x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
+    <form  x-data="{ buttonDisabled: false }" x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
             <h3 class="mb-6 text-2xl font-medium text-black text-center">Send us a Text</h3>
         <div class="block mb-4 border border-gray-200 rounded-lg">
             <input type="text" name="first-name" id="1-first-name" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="First Name">
@@ -186,9 +189,13 @@ class="flex relative flex-col w-full  bg-green-900 text-white  lg:flex-row lg:fl
             <textarea name="message" cols="5" id="1-message" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="What is your message?"></textarea>
         </div>
         <div class="block">
-        <button type="button" 
+        <button
+
+                x-on:click.debounce.500ms="buttonDisabled = true ;send_sms(1, 'Palmetto-Lawn-Solutions')"
+                 x-bind:disabled="buttonDisabled"
+                type="button"
          
-        onclick= "send_sms(1, 'Palmetto-Lawn-Solutions')" 
+
         class="w-full px-3 py-4 font-bold font-lg text-white  bg-green-400 text-white hover:bg-black hover:text-green-400 rounded-lg">Send</button> 
         </div>           
 
@@ -206,12 +213,13 @@ class="flex relative flex-col w-full  bg-green-900 text-white  lg:flex-row lg:fl
 <button 
  id="side-button" type="button" x-on:click.prevent="open = true" class=" 
   
+
    mb-3 fixed bottom-0 -right-80 z-10 mr-3 lg:mr-0 z-40 inline-flex items-center justify-center h-24 px-6 lg:mr-6 tracking-wide transition duration-200 rounded-lg focus:shadow-outline focus:outline-none  bg-green-400 text-white hover:bg-white hover:text-green-900 z-30">
     <h5 class="text-3xl font-extrabold">Send us a Text</h5> 
 </button>
 
         <div x-show.transition.opacity="open" class="transform-none p-4 fixed h-screen w-screen flex justify-center items-center bottom-0 right-0 bg-black bg-opacity-75 z-50">
-    <form x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
+    <form  x-data="{ buttonDisabled: false }" x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
             <h3 class="mb-6 text-2xl font-medium text-black text-center">Send us a Text</h3>
         <div class="block mb-4 border border-gray-200 rounded-lg">
             <input type="text" name="first-name" id="2-first-name" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="First Name">
@@ -226,9 +234,13 @@ class="flex relative flex-col w-full  bg-green-900 text-white  lg:flex-row lg:fl
             <textarea name="message" cols="5" id="2-message" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="What is your message?"></textarea>
         </div>
         <div class="block">
-        <button type="button" 
+        <button
+
+                x-on:click.debounce.500ms="buttonDisabled = true ;send_sms(2, 'Palmetto-Lawn-Solutions')"
+                 x-bind:disabled="buttonDisabled"
+                type="button"
          
-        onclick= "send_sms(2, 'Palmetto-Lawn-Solutions')" 
+
         class="w-full px-3 py-4 font-bold font-lg text-white  bg-green-400 text-white hover:bg-black hover:text-green-400 rounded-lg">Send</button> 
         </div>           
 
@@ -244,7 +256,9 @@ class="flex relative flex-col w-full  bg-green-900 text-white  lg:flex-row lg:fl
     <div class="relative order-first lg:order-last block lg:w-1/2 ">
 
     
-        <img src="https://landing-page-app-hero-images.s3.amazonaws.com/media/0HT06FAI6AGCGI0PXOPS094NK6AI561CNH3BMGFP.jpeg"  alt = "Main hero image of Palmetto Lawn Solutions performing Landscaping &amp; Hardscaping work"  class="object-cover w-full lg:absolute h-80 lg:h-full">
+        
+            <img src="https://landing-page-app-hero-images.s3.amazonaws.com/media/0HT06FAI6AGCGI0PXOPS094NK6AI561CNH3BMGFP.jpeg"   alt = "Main hero image of Palmetto Lawn Solutions performing Landscaping &amp; Hardscaping work"  class="object-cover w-full lg:absolute h-80 lg:h-full">
+            
     
     </div>
 
@@ -282,7 +296,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
         </div>
 
         
-        
         <br>
     </div>
 
@@ -299,7 +312,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
         </div>
 
         
-        
         <br>
     </div>
 
@@ -312,7 +324,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
             Locally Owned
         </div>
 
-        
         
         <br>
     </div>
@@ -327,7 +338,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
             Licensed
         </div>
 
-        
         
         <br>
     </div>
@@ -380,7 +390,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
     </section>
     
     
-    
     <section   id= "services" class="lg:mt-0 relative w-full px-8 font-sans leading-6  bg-green-900 border-0 border-green-200 text-white border-solid ">
         <div class="flex flex-col items-center max-w-6xl px-8 py-20 mx-auto leading-6 border-solid md:items-stretch md:justify-center md:py-24 ">
             
@@ -397,7 +406,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Driveway & Sidewalk Cleaning</h3>
                             <p
@@ -410,7 +418,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Fertilization</h3>
                             <p
@@ -423,7 +430,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Flower Bed Installation</h3>
                             <p
@@ -436,7 +442,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Lawn Aeration</h3>
                             <p
@@ -449,7 +454,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Leaf Raking & Bagging</h3>
                             <p
@@ -462,7 +466,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Shrub Trimming</h3>
                             <p
@@ -475,7 +478,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Mowing</h3>
                             <p
@@ -488,7 +490,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Mulch Installation</h3>
                             <p
@@ -501,7 +502,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Sod Layouts</h3>
                             <p
@@ -514,7 +514,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Stump Removal</h3>
                             <p
@@ -527,7 +526,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Power Washing</h3>
                             <p
@@ -540,7 +538,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     
                 <div class="max-w-xs col-span-4 font-sans border-0 border-green-200 ">
                     <div class="box-border flex flex-col items-center  h-full px-2 py-4 md:py-8 mx-4 leading-6 text-center border-solid ">
-                        
                         <div  class="md:mt-6 font-sans text-center border-0 border-green-200 ">
                             <h3  class="box-border text-xl font-bold leading-none tracking-wider border-solid text-green-400  ">Weed Control</h3>
                             <p
@@ -563,111 +560,126 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
         <div class="container relative flex flex-col justify-between h-full max-w-6xl px-10 mx-auto xl:px-0">
             <h2 class="mb-3 text-3xl font-extrabold leading-none sm:text-4xl lg:text-7xl tracking-wide  text-center">Our Best Work</h2>
             <h2 class="my-3 mb-10 text-xl font-medium  text-green-400  text-center">See why our customers love us</h2>
-            <div class="flex flex-wrap md:mx-4 md:mb-8 md:flex-row" x-data="{ open:false, activeSlide : 0, slides: [   [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/UIEQQODDG86AM0SHXXPZ0CZ3FMDLUU00T3SO7KVA.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/O3H5ESIMVGYORT2MRV0SHGHLDNMPMJD6NPN9Q58P.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/NF9NY7TQTKGWX1YD5PVE2O16W6GEK4RRKIYTYU6P.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/W9P8D0LI5MU1SBY7UDFUS0DQP52H7LPPMMK2PNK0.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/XDRQ1S1K9FJSEDXVGHVAZXMWXQTUVE5UZLGT9SP0.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/ZA5OMOWM79EV4I5PCYAPITOE62HLWBBQ04V6HRQI.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/ZTAFM26RVQXC9SLK1G6BTB19RQ735NE4T9VC6TO3.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/H8YIBZ6W34XWVWTEPBFAO4YCCZPR3YL50QUA18SW.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/LJE9JFETXDJJB6LF3POSLV9DQLLXUKCNFKH5JTN9.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/RHSN0XK7EAF3PMG7JSJ583QN9CHBHSYD5QSDKVMO.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/1VWZNGEO8WULXGR63RHU6Y4528GEGUG744K3010Q.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/65V9X13HIXSJWULGLPCZB7Q501M0OMI550L3U20C.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/PZUCK438LA9HQKCP0CFIAS3OFKG8IDK4NW03C4SC.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/BH55P1EU7FYXY894NNTND4CFRZKYCY1D0PXZUH9K.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/7ZFPNHTRBZ4G24VA7L98SEZWBVZ24HZJ9QOEH3GU.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/TEXUV9NS6L9CDOT3XF9C7RS0D7CQVI5O911EM95J.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/YBEAAOTDV8PH4CI7STB036WZH5XK7K5YHMWQAJCB.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/KIED4OIWIOTRXL229D8SZJIKFW5Y51K099U6YME7.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/JC7NJWF70XDSNKZUZ7JKRJ8GJRABTYNKT6GXZJ5G.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/M22W2C08NCYO02D1FI5ZWQQWQ0KMURZ49YHH04Z4.jpeg', 'photo'],    [ 'https://landing-page-app-hero-images.s3.amazonaws.com/media/DC85OAJU5DXJ528UDQHOAETF6LB9137SK2VG1SGC.jpeg', 'photo'],   ] }" @keydown.escape= "open = false"   >
+            <div class="flex flex-wrap md:mx-4 md:mb-8 md:flex-row" x-data="{ open:false, activeSlide : 0, slides: [   [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/75b7874a-cf22-475f-a783-74a2fa6e6f2c.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/c2a0051a-0db8-4fae-b16d-00b041d39c26.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/71a693ff-eb0a-4875-af7f-3752b56c70d9.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/1e77d666-14f5-47a7-8fb1-ba974cbb83f6.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/6db03d55-5fc0-4c8f-bde5-81f8e313768b.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/cc5e1b7b-b54d-44e7-9c67-bbd50a5382af.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/014aabdc-a2e3-4571-a239-a34652c6c07a.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/a490179f-ad10-46d7-8d1c-bda1bda6dc0a.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/f5b27e9f-f89a-40e9-ad65-db8ec4a7dc29.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/DC85OAJU5DXJ528UDQHOAETF6LB9137SK2VG1SGC.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/M22W2C08NCYO02D1FI5ZWQQWQ0KMURZ49YHH04Z4.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/JC7NJWF70XDSNKZUZ7JKRJ8GJRABTYNKT6GXZJ5G.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/KIED4OIWIOTRXL229D8SZJIKFW5Y51K099U6YME7.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/YBEAAOTDV8PH4CI7STB036WZH5XK7K5YHMWQAJCB.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/TEXUV9NS6L9CDOT3XF9C7RS0D7CQVI5O911EM95J.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/7ZFPNHTRBZ4G24VA7L98SEZWBVZ24HZJ9QOEH3GU.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/BH55P1EU7FYXY894NNTND4CFRZKYCY1D0PXZUH9K.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/PZUCK438LA9HQKCP0CFIAS3OFKG8IDK4NW03C4SC.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/65V9X13HIXSJWULGLPCZB7Q501M0OMI550L3U20C.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/1VWZNGEO8WULXGR63RHU6Y4528GEGUG744K3010Q.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/RHSN0XK7EAF3PMG7JSJ583QN9CHBHSYD5QSDKVMO.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/LJE9JFETXDJJB6LF3POSLV9DQLLXUKCNFKH5JTN9.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/H8YIBZ6W34XWVWTEPBFAO4YCCZPR3YL50QUA18SW.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/ZTAFM26RVQXC9SLK1G6BTB19RQ735NE4T9VC6TO3.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/ZA5OMOWM79EV4I5PCYAPITOE62HLWBBQ04V6HRQI.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/XDRQ1S1K9FJSEDXVGHVAZXMWXQTUVE5UZLGT9SP0.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/W9P8D0LI5MU1SBY7UDFUS0DQP52H7LPPMMK2PNK0.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/NF9NY7TQTKGWX1YD5PVE2O16W6GEK4RRKIYTYU6P.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/O3H5ESIMVGYORT2MRV0SHGHLDNMPMJD6NPN9Q58P.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/UIEQQODDG86AM0SHXXPZ0CZ3FMDLUU00T3SO7KVA.jpeg', 'photo'],   ] }" @keydown.escape= "open = false"   >
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 0; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/UIEQQODDG86AM0SHXXPZ0CZ3FMDLUU00T3SO7KVA.jpeg"  alt = "Photo number 1 of Palmetto Lawn Solutions&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 0; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/75b7874a-cf22-475f-a783-74a2fa6e6f2c.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 1; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/O3H5ESIMVGYORT2MRV0SHGHLDNMPMJD6NPN9Q58P.jpeg"  alt = "Photo number 2 of Palmetto Lawn Solutions&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 1; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/c2a0051a-0db8-4fae-b16d-00b041d39c26.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 2; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/NF9NY7TQTKGWX1YD5PVE2O16W6GEK4RRKIYTYU6P.jpeg"  alt = "Photo number 3 of Palmetto Lawn Solutions&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 2; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/71a693ff-eb0a-4875-af7f-3752b56c70d9.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 3; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/W9P8D0LI5MU1SBY7UDFUS0DQP52H7LPPMMK2PNK0.jpeg"  alt = "Photo number 4 of Palmetto Lawn Solutions&#x27;s best work performing a Mulch Installation job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 3; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/1e77d666-14f5-47a7-8fb1-ba974cbb83f6.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 4; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/XDRQ1S1K9FJSEDXVGHVAZXMWXQTUVE5UZLGT9SP0.jpeg"  alt = "Photo number 5 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 4; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/6db03d55-5fc0-4c8f-bde5-81f8e313768b.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 5; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/ZA5OMOWM79EV4I5PCYAPITOE62HLWBBQ04V6HRQI.jpeg"  alt = "Photo number 6 of Palmetto Lawn Solutions&#x27;s best work performing a Mowing job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 5; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/cc5e1b7b-b54d-44e7-9c67-bbd50a5382af.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 6; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/ZTAFM26RVQXC9SLK1G6BTB19RQ735NE4T9VC6TO3.jpeg"  alt = "Photo number 7 of Palmetto Lawn Solutions&#x27;s best work performing a Leaf Raking &amp; Bagging job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 6; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/014aabdc-a2e3-4571-a239-a34652c6c07a.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 7; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/H8YIBZ6W34XWVWTEPBFAO4YCCZPR3YL50QUA18SW.jpeg"  alt = "Photo number 8 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 7; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/a490179f-ad10-46d7-8d1c-bda1bda6dc0a.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 8; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/LJE9JFETXDJJB6LF3POSLV9DQLLXUKCNFKH5JTN9.jpeg"  alt = "Photo number 9 of Palmetto Lawn Solutions&#x27;s best work performing a Leaf Raking &amp; Bagging job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 8; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/f5b27e9f-f89a-40e9-ad65-db8ec4a7dc29.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 9; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/RHSN0XK7EAF3PMG7JSJ583QN9CHBHSYD5QSDKVMO.jpeg"  alt = "Photo number 10 of Palmetto Lawn Solutions&#x27;s best work performing a Shrub Trimming job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 9; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/DC85OAJU5DXJ528UDQHOAETF6LB9137SK2VG1SGC.jpeg"  alt = "Photo number 21 of Palmetto Lawn Solutions&#x27;s best work performing a Mowing job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 10; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/1VWZNGEO8WULXGR63RHU6Y4528GEGUG744K3010Q.jpeg"  alt = "Photo number 11 of Palmetto Lawn Solutions&#x27;s best work performing a Shrub Trimming job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 10; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/M22W2C08NCYO02D1FI5ZWQQWQ0KMURZ49YHH04Z4.jpeg"  alt = "Photo number 20 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 11; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/65V9X13HIXSJWULGLPCZB7Q501M0OMI550L3U20C.jpeg"  alt = "Photo number 12 of Palmetto Lawn Solutions&#x27;s best work performing a Shrub Trimming job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 11; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/JC7NJWF70XDSNKZUZ7JKRJ8GJRABTYNKT6GXZJ5G.jpeg"  alt = "Photo number 19 of Palmetto Lawn Solutions&#x27;s best work performing a Mulch Installation job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 12; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/PZUCK438LA9HQKCP0CFIAS3OFKG8IDK4NW03C4SC.jpeg"  alt = "Photo number 13 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 12; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/KIED4OIWIOTRXL229D8SZJIKFW5Y51K099U6YME7.jpeg"  alt = "Photo number 18 of Palmetto Lawn Solutions&#x27;s best work performing a Flower Bed Installation job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 13; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/BH55P1EU7FYXY894NNTND4CFRZKYCY1D0PXZUH9K.jpeg"  alt = "Photo number 14 of Palmetto Lawn Solutions&#x27;s best work performing a Flower Bed Installation job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 13; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/YBEAAOTDV8PH4CI7STB036WZH5XK7K5YHMWQAJCB.jpeg"  alt = "Photo number 17 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 14; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/7ZFPNHTRBZ4G24VA7L98SEZWBVZ24HZJ9QOEH3GU.jpeg"  alt = "Photo number 15 of Palmetto Lawn Solutions&#x27;s best work performing a Sod Layouts job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 14; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/TEXUV9NS6L9CDOT3XF9C7RS0D7CQVI5O911EM95J.jpeg"  alt = "Photo number 16 of Palmetto Lawn Solutions&#x27;s best work performing a Mulch Installation job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 15; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/TEXUV9NS6L9CDOT3XF9C7RS0D7CQVI5O911EM95J.jpeg"  alt = "Photo number 16 of Palmetto Lawn Solutions&#x27;s best work performing a Mulch Installation job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 15; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/7ZFPNHTRBZ4G24VA7L98SEZWBVZ24HZJ9QOEH3GU.jpeg"  alt = "Photo number 15 of Palmetto Lawn Solutions&#x27;s best work performing a Sod Layouts job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 16; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/YBEAAOTDV8PH4CI7STB036WZH5XK7K5YHMWQAJCB.jpeg"  alt = "Photo number 17 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 16; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/BH55P1EU7FYXY894NNTND4CFRZKYCY1D0PXZUH9K.jpeg"  alt = "Photo number 14 of Palmetto Lawn Solutions&#x27;s best work performing a Flower Bed Installation job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 17; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/KIED4OIWIOTRXL229D8SZJIKFW5Y51K099U6YME7.jpeg"  alt = "Photo number 18 of Palmetto Lawn Solutions&#x27;s best work performing a Flower Bed Installation job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 17; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/PZUCK438LA9HQKCP0CFIAS3OFKG8IDK4NW03C4SC.jpeg"  alt = "Photo number 13 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 18; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/JC7NJWF70XDSNKZUZ7JKRJ8GJRABTYNKT6GXZJ5G.jpeg"  alt = "Photo number 19 of Palmetto Lawn Solutions&#x27;s best work performing a Mulch Installation job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 18; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/65V9X13HIXSJWULGLPCZB7Q501M0OMI550L3U20C.jpeg"  alt = "Photo number 12 of Palmetto Lawn Solutions&#x27;s best work performing a Shrub Trimming job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 19; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/M22W2C08NCYO02D1FI5ZWQQWQ0KMURZ49YHH04Z4.jpeg"  alt = "Photo number 20 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 19; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/1VWZNGEO8WULXGR63RHU6Y4528GEGUG744K3010Q.jpeg"  alt = "Photo number 11 of Palmetto Lawn Solutions&#x27;s best work performing a Shrub Trimming job"   loading="lazy" ></div>
                     
                                     
                         
-                              
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 20; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/DC85OAJU5DXJ528UDQHOAETF6LB9137SK2VG1SGC.jpeg"  alt = "Photo number 21 of Palmetto Lawn Solutions&#x27;s best work performing a Mowing job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 20; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/RHSN0XK7EAF3PMG7JSJ583QN9CHBHSYD5QSDKVMO.jpeg"  alt = "Photo number 10 of Palmetto Lawn Solutions&#x27;s best work performing a Shrub Trimming job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 21; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/LJE9JFETXDJJB6LF3POSLV9DQLLXUKCNFKH5JTN9.jpeg"  alt = "Photo number 9 of Palmetto Lawn Solutions&#x27;s best work performing a Leaf Raking &amp; Bagging job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 22; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/H8YIBZ6W34XWVWTEPBFAO4YCCZPR3YL50QUA18SW.jpeg"  alt = "Photo number 8 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 23; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/ZTAFM26RVQXC9SLK1G6BTB19RQ735NE4T9VC6TO3.jpeg"  alt = "Photo number 7 of Palmetto Lawn Solutions&#x27;s best work performing a Leaf Raking &amp; Bagging job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 24; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/ZA5OMOWM79EV4I5PCYAPITOE62HLWBBQ04V6HRQI.jpeg"  alt = "Photo number 6 of Palmetto Lawn Solutions&#x27;s best work performing a Mowing job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 25; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/XDRQ1S1K9FJSEDXVGHVAZXMWXQTUVE5UZLGT9SP0.jpeg"  alt = "Photo number 5 of Palmetto Lawn Solutions&#x27;s best work performing a Stump Removal job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 26; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/W9P8D0LI5MU1SBY7UDFUS0DQP52H7LPPMMK2PNK0.jpeg"  alt = "Photo number 4 of Palmetto Lawn Solutions&#x27;s best work performing a Mulch Installation job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 27; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/NF9NY7TQTKGWX1YD5PVE2O16W6GEK4RRKIYTYU6P.jpeg"  alt = "Photo number 3 of Palmetto Lawn Solutions&#x27;s best work performing a null job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 28; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/O3H5ESIMVGYORT2MRV0SHGHLDNMPMJD6NPN9Q58P.jpeg"  alt = "Photo number 2 of Palmetto Lawn Solutions&#x27;s best work performing a null job"   loading="lazy" ></div>
+                    
+                                    
+                        
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 29; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/UIEQQODDG86AM0SHXXPZ0CZ3FMDLUU00T3SO7KVA.jpeg"  alt = "Photo number 1 of Palmetto Lawn Solutions&#x27;s best work performing a null job"   loading="lazy" ></div>
                     
                  
                                     
@@ -704,7 +716,7 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                                     </template>
                                     
                                     <template x-if="slide[1] != 'photo'  ">
-                                        <video class="object-contain max-w-full max-h-full rounded shadow-lg"  controls> <source :src="slide[0]" >
+                                        <video class="object-cover max-w-full max-h-full rounded shadow-lg"  controls> <source :src="slide[0]" >
                                         </video>
                                     </template> 
                                     
@@ -749,7 +761,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
 
             
 </div>
-
         
     
     
@@ -762,7 +773,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
 
 
                 <h2 class="mb-3 text-3xl font-extrabold leading-none sm:text-4xl lg:text-7xl tracking-wide text-center ">
-                    
                     Testimonials &amp; Reviews</h2>
                 <div class="block w-full h-1 max-w-lg mt-6 bg-purple-100 rounded-full"></div>
                 
@@ -771,10 +781,9 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                 <div class="items-start justify-start w-full mt-12 mb-4 lg:flex lg:flex-wrap">
 
                     
-            
+                    
                     <div class="flex flex-col items-center lg:items-start justify-center w-full h-auto mb-12 lg:w-1/2">
                     <div class="flex items-center lg:items-start ">
-                        
                         <div class="flex flex-col justify-start items-center lg:items-start ">
                             <h3 class="font-bold  text-white  ">Denise Nixon</h3>
                             <h3 class=" text-white ">Sumter, NC  , Stump Removal  </h3>
@@ -798,12 +807,12 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     </div>
                     
                     </div>
+                    
 
                     
-            
+                    
                     <div class="flex flex-col items-center lg:items-start justify-center w-full h-auto mb-12 lg:w-1/2">
                     <div class="flex items-center lg:items-start ">
-                        
                         <div class="flex flex-col justify-start items-center lg:items-start ">
                             <h3 class="font-bold  text-white  ">Jason Johnson</h3>
                             <h3 class=" text-white ">Sumter, SC  , Power Washing  </h3>
@@ -827,12 +836,12 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     </div>
                     
                     </div>
+                    
 
                     
-            
+                    
                     <div class="flex flex-col items-center lg:items-start justify-center w-full h-auto mb-12 lg:w-1/2">
                     <div class="flex items-center lg:items-start ">
-                        
                         <div class="flex flex-col justify-start items-center lg:items-start ">
                             <h3 class="font-bold  text-white  ">Anna Kearney</h3>
                             <h3 class=" text-white ">Sumter, NC  , Flower Bed Installation  </h3>
@@ -856,12 +865,12 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     </div>
                     
                     </div>
+                    
 
                     
-            
+                    
                     <div class="flex flex-col items-center lg:items-start justify-center w-full h-auto mb-12 lg:w-1/2">
                     <div class="flex items-center lg:items-start ">
-                        
                         <div class="flex flex-col justify-start items-center lg:items-start ">
                             <h3 class="font-bold  text-white  ">Michele Coker</h3>
                             <h3 class=" text-white ">Sumter, SC  , Mowing  </h3>
@@ -885,6 +894,7 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                     </div>
                     
                     </div>
+                    
 
                     
                 </div>  
@@ -893,7 +903,7 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                 
                 <a target= "_blank" href="https://www.facebook.com/Palmetto-Lawn-Solutions-1917707621602357/reviews/"  class="w-full">
                     <button   type="button" class="inline-flex w-full items-center justify-center h-16 px-6 lg:mr-6 tracking-wide transition duration-200 rounded-lg focus:shadow-outline focus:outline-none   text-black  bg-green-400  hover:bg-white hover:text-green-900 ">
-                            <h5 class="text-2xl font-extrabold">Leave a Review</h5> 
+                            <h5 class="text-2xl font-extrabold">Leave a Review </h5> 
                     </button>
                 </a>
                 
@@ -926,7 +936,6 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
 
         
 
-            <!-- Question 1 -->
             <div x-data="{ show: false }" class="relative overflow-hidden border-b border-green-100 select-none">
                 <h3                 
                 @click="show=!show" class=" text-center flex items-center justify-between px-2 text-xl font-medium text-green-900  cursor-pointer sm:text-xl md:text-2xl py-7 hover:text-green-400  lg:text-left">
@@ -971,26 +980,119 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
 
     <h2  class="mb-5 text-3xl  mx-auto text-center font-extrabold leading-none sm:text-4xl lg:text-7xl"> Service Areas </h2>
     <h2  class="my-3 mb-10  text-xl font-medium text-green-400 text-center"> Proudly Serving   Sumter & Surrounding Areas   </h2>
-    <div style="height:500px; width:100%;" id="map"></div>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSw3qRocbSgfTrtxZbCsTjSHZaaJuUXF4&callback=initMap&libraries=&v=weekly"
-      async
-    ></script> 
+    <div class="relative col-span-3 row-start-1 mt-6 lg:mt-0 lg:col-start-1">
+        <div aria-hidden="true" x-cloak x-data="{ shown: false }" x-intersect.half="shown = true" class="hidden lg:block">
+            <svg
+                x-show="shown"
+                x-transition:enter="transition duration-1000"
+                x-transition:enter-start="transform translate-x-full opacity-0"
+                x-transition:enter-end="transform translate-x-0 opacity-100"
+                x-transition:leave="transition duration-1000 opacity-100"
+                x-transition:leave-start="transform opacity-0"
+                x-transition:leave-end="transform translate-x-full"
+                class="absolute top-0 -right-48"
+                width="404"
+                height="404"
+                fill="none"
+                viewBox="0 0 404 404"
+            >
+                <defs>
+                    <pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect width="404" height="404" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)" />
+            </svg>
+        </div>
+        <div class="relative h-[500px] w-full rounded-2xl shadow-xl overflow-hidden">
+            <div class="w-full h-full bg-gray-400">
+                <div style="height:500px; width:100%;" id="map"></div>
+                <script >
+                    async function coordinate(url) {
+const res = await fetch(url)
+const coordinates = await res.json()
+return [
+    coordinates.results[0].geometry.location.lat,
+    coordinates.results[0].geometry.location.lng,
+]
+}
+async function initMap() {
+let radius = document.querySelector('#radius').innerText
+let city = document.querySelector('#city').innerText
+let state = document.querySelector('#state').innerText
+console.log('radius - city ', city)
+console.log('radius - radius ', state)
+let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${state}&key=AIzaSyDuL9weltDy_kOcISLRucx5-JSFsezZpVE`
 
+let coordinates = await coordinate(url)
 
-    
+const map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {
+        lat: coordinates[0],
+        lng: coordinates[1],
+    },
+    mapTypeId: 'terrain',
+})
+
+const cityCircle = new google.maps.Circle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35,
+    map,
+    animation: google.maps.Animation.DROP,
+    center: {
+        lat: coordinates[0],
+        lng: coordinates[1],
+    },
+    radius: radius * 1638,
+})
+}
+
+const target = document.querySelector('#map')
+
+const handleIntersection = (entries) => {
+console.log("it got here")
+entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+        const script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src =
+            'https://maps.googleapis.com/maps/api/js?key=AIzaSyDSw3qRocbSgfTrtxZbCsTjSHZaaJuUXF4&callback=initMap&libraries=&v=weekly'
+        document.body.appendChild(script)
+        console.log("it got there")
+        observer.unobserve(entry.target)
+    }
+})
+}
+const observer = new IntersectionObserver(handleIntersection)
+observer.observe(target)
+            
+                </script>
+<!--                    <script-->
+<!--                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSw3qRocbSgfTrtxZbCsTjSHZaaJuUXF4&callback=initMap&libraries=&v=weekly"-->
+<!--                    async-->
+<!--                    defer-->
+<!--                  ></script> -->
+          
+            <span class="sr-only" id="city">Sumter</span>
+            <span class="sr-only" id="state">SC</span>
+            <span class="sr-only" id="radius">50</span>
+            </div>
+        </div>
+    </div>
+
     </div>
 </section>
 
 
 
     <section  class="py-10 bg-green-900">
-    
         <div class="flex flex-col justify-around text-center md:flex-row">
             <p class="order-last text-sm leading-tight text-green-400 md:order-first"> Crafted with <a  href="https://www.prophone.com/prosite" class="  text-white ">ProPhone</a>. Built with ❤️ by our team. </p>
-             
             <ul class="flex flex-row flex-wrap text-center justify-center pb-3 lg:-ml-4 lg:-mr-4 text-sm">
                 <li> <a  href="#about" class="px-2 md:px-4 text-green-400 hover:text-white">About Us</a> </li>
                 
@@ -1009,6 +1111,9 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
                 
                 <li> <a  href="#find-us" class=" px-2 md:px-4 text-green-400 hover:text-white">Service Areas</a></li>
                 
+                
+                <li> <a  href="palmettolawnsolutions.com/sitemap.xml" class=" px-2 md:px-4 text-green-400 hover:text-white">Sitemap</a></li>
+                
             </ul>
         </div>
     </div>
@@ -1016,10 +1121,13 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
 </div> 
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-  
 
 </body>
 </html>
+
+
+
+
 
 
 
